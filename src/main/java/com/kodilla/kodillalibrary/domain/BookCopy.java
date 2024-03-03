@@ -9,29 +9,23 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.time.LocalDate;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
-@Entity(name = "readers")
-public class Reader {
+@Entity(name = "bookCopies")
+public class BookCopy {
 
     @Id
     @GeneratedValue
     @NotNull
     private Long id;
 
-    @Column(name = "firstName")
+    @Column(name = "titleId")
     @NotNull
-    private String firstName;
+    private Long titleId;
 
-    @Column(name = "lastName")
+    @Column(name = "status")
     @NotNull
-    private String lastName;
-
-    @Column(name = "joiningDate")
-    @NotNull
-    private LocalDate joined;
-
+    private String status;
 }
