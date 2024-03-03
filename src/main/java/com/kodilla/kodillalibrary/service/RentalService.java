@@ -1,5 +1,6 @@
 package com.kodilla.kodillalibrary.service;
 
+import com.kodilla.kodillalibrary.controller.ReaderNotFoundException;
 import com.kodilla.kodillalibrary.controller.RentalNotFoundException;
 import com.kodilla.kodillalibrary.domain.Rental;
 import com.kodilla.kodillalibrary.repository.RentalRepository;
@@ -19,8 +20,12 @@ public class RentalService {
         return repository.findAll();
     }
 
-    public List<Rental> getAllRentalsByReaderId(final Long readerId) {
-        return repository.findAllByReaderId(readerId);
+    public List<Rental> getAllRentalsByReaderId(final Long readerId) throws RentalNotFoundException{
+        try {
+            return repository.findAllByReaderId(readerId);
+        } catch (EmptyResultDataAccessException e) {
+            throw new RentalNotFoundException();
+        }
     }
 
     public Rental getRental(final Long rentalId) throws RentalNotFoundException {
@@ -39,7 +44,11 @@ public class RentalService {
         }
     }
 
-    public Long countByReaderId (final Long readerId) {
-        return repository.countAllByReaderId(readerId);
+    public Long countByReaderId(final Long readerId) throws ReaderNotFoundException {
+        try {
+            return repository.countAllByReaderId(readerId);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ReaderNotFoundException();
+        }
     }
 }

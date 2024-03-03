@@ -1,6 +1,6 @@
 package com.kodilla.kodillalibrary.domain;
 
-import com.sun.istack.NotNull;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.NonNull;
 
 import java.time.LocalDate;
 
@@ -19,22 +20,22 @@ public class Rental {
 
     @Id
     @GeneratedValue
-    @NotNull
+    @NonNull
     private Long id;
 
-    @Column(name = "bookCopyId")
-    @NotNull
+    @Column(name = "book_copy_id")
+    @NonNull
     private Long bookCopyId;
 
-    @Column(name = "readerId")
-    @NotNull
+    @Column(name = "reader_id")
+    @NonNull
     private Long readerId;
 
-    @Column(name = "dateOfRent")
-    @NotNull
+    @Column(name = "date_Of_Rent")
+    @NonNull
     private LocalDate dateOfRent;
 
-    @Column(name = "dateOfReturn")
+    @Column(name = "date_Of_Return")
     private LocalDate dateOfReturn;
 
 }

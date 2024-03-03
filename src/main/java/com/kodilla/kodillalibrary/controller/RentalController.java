@@ -31,7 +31,7 @@ public class RentalController {
     }
 
     @GetMapping(value = "/reader/{readerId}")
-    public ResponseEntity<List<RentalDto>> getRentalsByReaderId(@PathVariable Long readerId) throws RentalNotFoundException {
+    public ResponseEntity<List<RentalDto>> getRentalsByReaderId(@PathVariable Long readerId) throws RentalNotFoundException, ReaderNotFoundException {
         LOGGER.info("This reader has: " + service.countByReaderId(readerId) + " rental(s).");
         return ResponseEntity.ok(mapper.mapToRentalDtoList(service.getAllRentalsByReaderId(readerId)));
     }

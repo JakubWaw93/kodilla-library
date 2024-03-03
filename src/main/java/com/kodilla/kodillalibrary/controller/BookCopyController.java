@@ -6,6 +6,8 @@ import com.kodilla.kodillalibrary.mapper.BookCopyMapper;
 import com.kodilla.kodillalibrary.service.BookCopyService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +22,11 @@ public class BookCopyController {
 
     private final BookCopyService service;
     private final BookCopyMapper mapper;
+    private final Logger LOGGER = LoggerFactory.getLogger(BookCopyController.class);
 
     @GetMapping(value = "/title/{titleId}")
     public ResponseEntity<List<BookCopyDto>> getBookCopiesByTitleId(@PathVariable Long titleId) throws BookCopyNotFoundException {
+        LOGGER.info("This Title has: " + service.countByTitleId(titleId) + " copies");
         return ResponseEntity.ok(mapper.mapToBookCopyDtoList(service.getAllBookCopiesByTitleId(titleId)));
     }
 

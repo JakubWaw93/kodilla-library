@@ -18,7 +18,8 @@ public class GlobalHttpExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ReaderNotFoundException.class)
     public ResponseEntity<Object> handleReaderNotFoundException(ReaderNotFoundException exception) {
         return new ResponseEntity<>("Reader with given parameter doesn't exist", HttpStatus.BAD_REQUEST);
-    }@ExceptionHandler(RentalNotFoundException.class)
+    }
+    @ExceptionHandler(RentalNotFoundException.class)
     public ResponseEntity<Object> handleRentalNotFoundException(RentalNotFoundException exception) {
         return new ResponseEntity<>("Rental with given parameter doesn't exist", HttpStatus.BAD_REQUEST);
     }

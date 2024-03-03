@@ -1,7 +1,5 @@
 package com.kodilla.kodillalibrary.controller;
 
-import com.kodilla.kodillalibrary.domain.BookCopy;
-import com.kodilla.kodillalibrary.domain.BookCopyDto;
 import com.kodilla.kodillalibrary.domain.Title;
 import com.kodilla.kodillalibrary.domain.TitleDto;
 import com.kodilla.kodillalibrary.mapper.TitleMapper;
@@ -29,13 +27,13 @@ public class TitleController {
     }
 
     @GetMapping(value = "/author/{author}")
-    public ResponseEntity<List<TitleDto>> getTitlesByAuthor(@PathVariable String author) throws TitleNotFoundException {
+    public ResponseEntity<List<TitleDto>> getTitlesByAuthor(@PathVariable String author) {
         List<Title> titles = service.getAllTitlesByAuthor(author);
         return ResponseEntity.ok(mapper.mapToTitleDtoList(titles));
     }
 
     @GetMapping(value = "/theTitle/{theTitle}")
-    public ResponseEntity<List<TitleDto>> getTitlesByTheTitle(@PathVariable String theTitle) throws TitleNotFoundException {
+    public ResponseEntity<List<TitleDto>> getTitlesByTheTitle(@PathVariable String theTitle) {
         List<Title> titles = service.getAllTitlesByTheTitle(theTitle);
         return ResponseEntity.ok(mapper.mapToTitleDtoList(titles));
     }

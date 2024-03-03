@@ -1,9 +1,11 @@
 package com.kodilla.kodillalibrary.domain;
 
-import com.sun.istack.NotNull;
+
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,19 +20,19 @@ public class Title {
 
     @Id
     @GeneratedValue
-    @NotNull
+    @NonNull
     private Long id;
 
     @Column(name = "title")
-    @NotNull
+    @NonNull
     private String theTitle;
 
     @Column(name = "author")
-    @NotNull
+    @NonNull
     private String author;
 
-    @Column(name = "publicationYear")
-    @NotNull
+    @Column(name = "publication_year")
+    @NonNull
     private int publicationYear;
 
 

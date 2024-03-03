@@ -1,9 +1,10 @@
 package com.kodilla.kodillalibrary.domain;
 
-import com.sun.istack.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,19 +20,19 @@ public class Reader {
 
     @Id
     @GeneratedValue
-    @NotNull
+    @NonNull
     private Long id;
 
-    @Column(name = "firstName")
-    @NotNull
+    @Column(name = "first_name")
+    @NonNull
     private String firstName;
 
-    @Column(name = "lastName")
-    @NotNull
+    @Column(name = "last_name")
+    @NonNull
     private String lastName;
 
-    @Column(name = "joiningDate")
-    @NotNull
+    @Column(name = "joining_date")
+    @NonNull
     private LocalDate joined;
 
 }
