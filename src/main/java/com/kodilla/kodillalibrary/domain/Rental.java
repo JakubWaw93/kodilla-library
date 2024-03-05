@@ -5,10 +5,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.NonNull;
+
 
 import java.time.LocalDate;
 
@@ -20,19 +22,19 @@ public class Rental {
 
     @Id
     @GeneratedValue
-    @NonNull
+    @NotNull
     private Long id;
 
     @Column(name = "book_copy_id")
-    @NonNull
+    @NotNull
     private Long bookCopyId;
 
     @Column(name = "reader_id")
-    @NonNull
+    @NotNull
     private Long readerId;
 
     @Column(name = "date_Of_Rent")
-    @NonNull
+    @NotNull
     private LocalDate dateOfRent;
 
     @Column(name = "date_Of_Return")

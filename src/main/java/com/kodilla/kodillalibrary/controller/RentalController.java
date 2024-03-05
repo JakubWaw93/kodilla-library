@@ -1,8 +1,12 @@
 package com.kodilla.kodillalibrary.controller;
 
+import com.kodilla.kodillalibrary.domain.BookCopy;
+import com.kodilla.kodillalibrary.domain.BookStatus;
 import com.kodilla.kodillalibrary.domain.Rental;
 import com.kodilla.kodillalibrary.domain.RentalDto;
+import com.kodilla.kodillalibrary.mapper.BookCopyMapper;
 import com.kodilla.kodillalibrary.mapper.RentalMapper;
+import com.kodilla.kodillalibrary.service.BookCopyService;
 import com.kodilla.kodillalibrary.service.RentalService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
@@ -22,6 +26,10 @@ public class RentalController {
 
     private final RentalService service;
     private final RentalMapper mapper;
+
+    private final BookCopyService bookCopyService;
+    private final BookCopyMapper bookCopyMapper;
+
     private final Logger LOGGER = LoggerFactory.getLogger(RentalController.class);
 
     @GetMapping
@@ -42,16 +50,27 @@ public class RentalController {
     }
 
     @PutMapping
-    public ResponseEntity<RentalDto> updateRental(@RequestBody RentalDto rentalDto) {
+    public ResponseEntity<RentalDto> updateRental(@RequestBody RentalDto rentalDto) throws BookCopyNotFoundException {
         Rental rental = mapper.mapToRental(rentalDto);
         Rental savedRental = service.saveRental(rental);
+        BookCopy bookCopy = bookCopyService.getBookCopy(savedRental.getBookCopyId());
+        bookCopy.setStatus(BookStatus.AVAILABLE);
+        bookCopyService.saveBookCopy(bookCopy);
         return ResponseEntity.ok(mapper.mapToRentalDto(savedRental));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createRental(@RequestBody RentalDto rentalDto) {
+    public ResponseEntity<Void> createRental(@RequestBody RentalDto rentalDto) throws BookCopyNotFoundException {
         Rental rental = mapper.mapToRental(rentalDto);
-        service.saveRental(rental);
+        long copyId = rental.getBookCopyId();
+        BookCopy bookCopy = bookCopyService.getBookCopy(copyId);
+        if (bookCopy.getStatus().equals(BookStatus.AVAILABLE)) {
+            service.saveRental(rental);
+            bookCopy.setStatus(BookStatus.RENTED);
+            bookCopyService.saveBookCopy(bookCopy);
+        } else {
+            LOGGER.info("This copy is no available");
+        }
         return ResponseEntity.ok().build();
     }
 

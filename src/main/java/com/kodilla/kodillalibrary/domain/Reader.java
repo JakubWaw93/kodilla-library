@@ -4,12 +4,13 @@ package com.kodilla.kodillalibrary.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.NonNull;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @AllArgsConstructor
@@ -20,19 +21,19 @@ public class Reader {
 
     @Id
     @GeneratedValue
-    @NonNull
+    @NotNull
     private Long id;
 
     @Column(name = "first_name")
-    @NonNull
+    @NotNull
     private String firstName;
 
     @Column(name = "last_name")
-    @NonNull
+    @NotNull
     private String lastName;
 
     @Column(name = "joining_date")
-    @NonNull
+    @NotNull
     private LocalDate joined;
 
 }

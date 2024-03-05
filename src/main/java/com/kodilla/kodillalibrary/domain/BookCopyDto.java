@@ -9,6 +9,6 @@ public class BookCopyDto {
 
     private Long id;
     private Long titleId;
-    private String status;
+    private BookStatus status;
 
 }

@@ -4,29 +4,31 @@ package com.kodilla.kodillalibrary.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.NonNull;
+import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @Entity(name = "book_Copies")
 public class BookCopy {
 
     @Id
     @GeneratedValue
-    @NonNull
+    @NotNull
     private Long id;
 
     @Column(name = "title_Id")
-    @NonNull
+    @NotNull
     private Long titleId;
 
     @Column(name = "status")
-    @NonNull
-    private String status;
+    @NotNull
+    private BookStatus status;
+
+
 }
