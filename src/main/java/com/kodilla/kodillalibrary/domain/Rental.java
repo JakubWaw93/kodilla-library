@@ -1,43 +1,41 @@
 package com.kodilla.kodillalibrary.domain;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity(name = "rentals")
 public class Rental {
 
     @Id
-    @GeneratedValue
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "rental_id", unique = true)
     private Long id;
 
-    @Column(name = "book_copy_id")
-    @NotNull
-    private Long bookCopyId;
+    @ManyToOne
+    @JoinColumn(name = "bookCopy_id", nullable = false)
+    private BookCopy bookCopy;
 
-    @Column(name = "reader_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "reader_id", referencedColumnName = "reader_id", nullable = false)
     @NotNull
-    private Long readerId;
+    private Reader reader;
 
-    @Column(name = "date_Of_Rent")
+    @Column(name = "date_of_rent", nullable = false)
     @NotNull
     private LocalDate dateOfRent;
 
-    @Column(name = "date_Of_Return")
+    @Column(name = "date_of_return")
     private LocalDate dateOfReturn;
 
 }

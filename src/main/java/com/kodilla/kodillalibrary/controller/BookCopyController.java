@@ -1,10 +1,12 @@
 package com.kodilla.kodillalibrary.controller;
 
+import com.kodilla.kodillalibrary.controller.exception.BookCopyNotFoundException;
+import com.kodilla.kodillalibrary.controller.exception.RentalNotFoundException;
+import com.kodilla.kodillalibrary.controller.exception.TitleNotFoundException;
 import com.kodilla.kodillalibrary.domain.BookCopy;
 import com.kodilla.kodillalibrary.domain.BookCopyDto;
 import com.kodilla.kodillalibrary.mapper.BookCopyMapper;
 import com.kodilla.kodillalibrary.service.BookCopyService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,14 +38,14 @@ public class BookCopyController {
     }
 
     @PutMapping
-    public ResponseEntity<BookCopyDto> updateBookCopy(@RequestBody BookCopyDto bookCopyDto) {
+    public ResponseEntity<BookCopyDto> updateBookCopy(@RequestBody BookCopyDto bookCopyDto) throws TitleNotFoundException, RentalNotFoundException {
         BookCopy bookCopy = mapper.mapToBookCopy(bookCopyDto);
         BookCopy savedBookCopy = service.saveBookCopy(bookCopy);
         return ResponseEntity.ok(mapper.mapToBookCopyDto(savedBookCopy));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createBookCopy(@RequestBody BookCopyDto bookCopyDto) {
+    public ResponseEntity<Void> createBookCopy(@RequestBody BookCopyDto bookCopyDto) throws TitleNotFoundException, RentalNotFoundException {
         BookCopy bookCopy = mapper.mapToBookCopy(bookCopyDto);
         service.saveBookCopy(bookCopy);
         return ResponseEntity.ok().build();

@@ -1,13 +1,12 @@
 package com.kodilla.kodillalibrary.service;
 
-import com.kodilla.kodillalibrary.controller.ReaderNotFoundException;
+import com.kodilla.kodillalibrary.controller.exception.ReaderNotFoundException;
 import com.kodilla.kodillalibrary.domain.Reader;
 import com.kodilla.kodillalibrary.repository.ReaderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.lang.ref.PhantomReference;
 import java.util.List;
 
 @Service

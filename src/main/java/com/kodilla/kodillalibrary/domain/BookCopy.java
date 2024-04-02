@@ -6,29 +6,35 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Entity(name = "book_Copies")
+@Entity(name = "bookCopies")
 public class BookCopy {
 
     @Id
     @GeneratedValue
-    @NotNull
+    @Column(name = "bookCopy_Id", unique = true)
     private Long id;
 
-    @Column(name = "title_Id")
-    @NotNull
-    private Long titleId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "title_id", referencedColumnName = "title_id", nullable = false)
+    private Title title;
 
     @Column(name = "status")
-    @NotNull
-    private BookStatus status;
+    private BookStatus status = BookStatus.AVAILABLE;
+
+    @OneToMany(
+            targetEntity = Rental.class,
+            mappedBy = "bookCopy",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.PERSIST)
+    private List<Rental> rentals = new ArrayList<>();
 
 
 }

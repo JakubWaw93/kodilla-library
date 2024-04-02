@@ -1,7 +1,7 @@
 package com.kodilla.kodillalibrary.service;
 
-import com.kodilla.kodillalibrary.controller.ReaderNotFoundException;
-import com.kodilla.kodillalibrary.controller.RentalNotFoundException;
+import com.kodilla.kodillalibrary.controller.exception.ReaderNotFoundException;
+import com.kodilla.kodillalibrary.controller.exception.RentalNotFoundException;
 import com.kodilla.kodillalibrary.domain.Rental;
 import com.kodilla.kodillalibrary.repository.RentalRepository;
 import lombok.RequiredArgsConstructor;

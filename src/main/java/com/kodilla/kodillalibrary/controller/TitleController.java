@@ -1,5 +1,6 @@
 package com.kodilla.kodillalibrary.controller;
 
+import com.kodilla.kodillalibrary.controller.exception.TitleNotFoundException;
 import com.kodilla.kodillalibrary.domain.Title;
 import com.kodilla.kodillalibrary.domain.TitleDto;
 import com.kodilla.kodillalibrary.mapper.TitleMapper;

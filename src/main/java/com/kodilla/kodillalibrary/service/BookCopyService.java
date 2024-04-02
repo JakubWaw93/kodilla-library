@@ -1,6 +1,6 @@
 package com.kodilla.kodillalibrary.service;
 
-import com.kodilla.kodillalibrary.controller.BookCopyNotFoundException;
+import com.kodilla.kodillalibrary.controller.exception.BookCopyNotFoundException;
 import com.kodilla.kodillalibrary.domain.BookCopy;
 import com.kodilla.kodillalibrary.repository.BookCopyRepository;
 import lombok.RequiredArgsConstructor;

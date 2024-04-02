@@ -3,34 +3,38 @@ package com.kodilla.kodillalibrary.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @Entity(name="titles")
 public class Title {
 
     @Id
-    @GeneratedValue()
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "title_id", unique = true)
     private Long id;
 
-    @Column(name = "title")
-    @NotNull
+    @Column(name = "title", nullable = false)
     private String theTitle;
 
-    @Column(name = "author")
-    @NotNull
+    @Column(name = "author", nullable = false)
     private String author;
 
-    @Column(name = "publication_year")
-    @NotNull
+    @Column(name = "publication_year", nullable = false)
     private int publicationYear;
+
+    @OneToMany(targetEntity = BookCopy.class,
+    mappedBy = "title",
+    cascade = CascadeType.PERSIST,
+    fetch = FetchType.EAGER)
+    private List<BookCopy> bookCopies = new ArrayList<>();
 
 
 
