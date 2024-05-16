@@ -7,17 +7,15 @@ import com.kodilla.kodillalibrary.domain.BookCopy;
 import com.kodilla.kodillalibrary.domain.BookStatus;
 import com.kodilla.kodillalibrary.domain.Rental;
 import com.kodilla.kodillalibrary.domain.RentalDto;
-import com.kodilla.kodillalibrary.mapper.BookCopyMapper;
 import com.kodilla.kodillalibrary.mapper.RentalMapper;
 import com.kodilla.kodillalibrary.service.BookCopyService;
 import com.kodilla.kodillalibrary.service.RentalService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import org.slf4j.Logger;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -32,7 +30,6 @@ public class RentalController {
     private final RentalMapper mapper;
 
     private final BookCopyService bookCopyService;
-    private final BookCopyMapper bookCopyMapper;
 
     private final Logger LOGGER = LoggerFactory.getLogger(RentalController.class);
 
